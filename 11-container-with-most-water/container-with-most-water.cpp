@@ -5,7 +5,6 @@ public:
         int max_area=0;
         while(i<j){
             int area=min(height[i],height[j])*(j-i);
-            cout<<area<<endl;
             max_area=max(area,max_area);
             if(height[i]<height[j]){
                 i++;
