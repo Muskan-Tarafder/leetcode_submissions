@@ -15,21 +15,21 @@ public:
         if(root==NULL){
             return;
         }
-        if(ans[lvl]==INT_MIN){
-            ans[lvl]=root->val;
+        if(lvl==ans.size()){
+            ans.push_back(root->val);
         }
         solve(root->right,ans,lvl+1);
         solve(root->left,ans,lvl+1);
     }
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> ans(101,INT_MIN);
+        vector<int> ans;
         solve(root,ans,0);
-        vector<int> final_;
-        for(int i=0;i<=100;i++){
-            if(ans[i]!=INT_MIN){
-                final_.push_back(ans[i]);
-            }
-        }
-        return final_;
+        // vector<int> final_;
+        // for(int i=0;i<=100;i++){
+        //     if(ans[i]!=INT_MIN){
+        //         final_.push_back(ans[i]);
+        //     }
+        // }
+        return ans;
     }
 };
