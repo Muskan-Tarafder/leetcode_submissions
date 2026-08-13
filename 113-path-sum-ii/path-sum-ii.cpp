@@ -11,27 +11,22 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root,int targetSum,int curSum,vector<vector<int>> &ans, vector<int> &temp){
+    void solve(TreeNode* root,int targetSum,vector<vector<int>> &ans, vector<int> &temp){
         if(root==NULL ){
             return;
         }
-        if(targetSum==curSum+(root->val)){
+        if(targetSum-(root->val)==0){
             if(root->left==NULL && root->right==NULL){
-                // cout<<"last added value: "<<root->val<<endl;
                 temp.push_back(root->val);
                 ans.push_back(temp);
                 temp.pop_back();
                 return;
             }
-            // else{
-            //     return;
-            // }
         }
        
-            // cout<<"trying to add: "<<root->val<<"target value: "<<targetSum<<endl;
         temp.push_back(root->val);
-        solve(root->left,targetSum,curSum+(root->val),ans,temp);
-        solve(root->right,targetSum,curSum+(root->val),ans,temp);
+        solve(root->left,targetSum-(root->val),ans,temp);
+        solve(root->right,targetSum-(root->val),ans,temp);
         temp.pop_back();
 
         
@@ -39,7 +34,7 @@ public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> ans;
         vector<int> temp;
-        solve(root,targetSum,0,ans,temp);
+        solve(root,targetSum,ans,temp);
         return ans;
     }
 };
