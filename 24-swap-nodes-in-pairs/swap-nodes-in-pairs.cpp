@@ -47,20 +47,24 @@ public:
         }
 
         // prev is new head
-        head = prev;
+        // head = prev;
 
-        // temp is the node after first pair
-        // old head is now the tail of first pair
-        ListNode* prev2 = head->next;
+        // // temp is the node after first pair
+        // // old head is now the tail of first pair
+        // ListNode* prev2 = head->next;
 
-        // Connect tail of first pair to remaining list
-        prev2->next = temp;
+        // // Connect tail of first pair to remaining list
+        // prev2->next = temp;
 
-        while (temp && temp->next) {
-            prev2 = solve(prev2, temp);
-            temp = prev2->next;
+        // while (temp && temp->next) {
+        //     prev2 = solve(prev2, temp);
+        //     temp = prev2->next;
+        // }
+        if(nxt){
+            head->next=swapPairs(nxt);
         }
 
-        return head;
+
+        return prev;
     }
 };
