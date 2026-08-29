@@ -16,8 +16,26 @@ public:
         // cout<<"take: "<<take<<" nottake:"<<notTake<<endl;
         return dp[i][prev+1]=max(take, notTake);
     }
+
+    int solveTab(vector<int>& nums){
+        vector<vector<int>> dp(nums.size()+1,vector<int> (nums.size()+1,0));
+
+        for(int i=nums.size()-1;i>=0;i--){
+            for(int prev=i-1;prev>=-1;prev--){
+                int notTake = dp[i + 1][prev+1];
+
+                int take = 0;
+                if (prev == -1 || nums[i] > nums[prev]) {
+                    take = 1 + dp[i + 1][i+1];
+                }
+                dp[i][prev+1]=max(take,notTake);
+            }
+        }
+        return dp[0][0];
+    }
     int lengthOfLIS(vector<int>& nums) {
-        vector<vector<int>> dp(nums.size(),vector<int> (nums.size(),-1));
-        return solve(nums,0,-1,dp);
+        vector<vector<int>> dp(nums.size()+1,vector<int> (nums.size()+1,-1));
+        // return solve(nums,0,-1,dp);
+        return solveTab(nums);
     }
 };
