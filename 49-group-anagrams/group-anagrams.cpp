@@ -1,35 +1,19 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<int, unordered_map<char, int>> hm;
-        vector<vector<string>> ans;
+        map<vector<int>,vector<string>> grp_map;
 
-        for (int i = 0; i < strs.size(); i++) {
-
-            unordered_map<char, int> freq;
-
-            for (char c : strs[i]) {
-                freq[c]++;
+        for(int i=0;i<strs.size();i++){
+            vector<int> cnt(26,0);
+            for(int j=0;j<strs[i].size();j++){
+                cnt[strs[i][j]-'a']++;
             }
-
-            bool flag = false;
-
-            for (auto &p : hm) {
-                if (p.second == freq) {
-                    ans[p.first].push_back(strs[i]);
-                    flag = true;
-                    break;
-                }
-            }
-
-            if (flag == false) {
-                int idx = hm.size();
-
-                hm[idx] = freq;
-                ans.push_back({strs[i]});
-            }
+            grp_map[cnt].push_back(strs[i]);
         }
-
+        vector<vector<string>> ans;
+        for(auto const&[key,val]:grp_map){
+            ans.push_back(val);
+        }
         return ans;
     }
 };
