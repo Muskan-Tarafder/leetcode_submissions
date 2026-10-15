@@ -4,23 +4,23 @@ public:
         if(m==0){
             nums1=nums2;
         }
-        int j=n-1;
-        int i=m-1;
-        int empty=m+n-1;
+        if(n==0){
+            return;
+        }
+        int i=m-1,j=n-1,empty=m+n-1;
         while(i>=0 && j>=0){
-            if(nums2[j]<nums1[i]){
-                cout<<"substituting in empty"<<nums2[j]<<endl;
+            if(nums1[i]>nums2[j]){
                 nums1[empty]=nums1[i];
-                cout<<"substituted in empty"<<nums1[empty]<<endl;
                 i--;
-            }else {
-                nums1[empty] = nums2[j];
+            }else{
+                nums1[empty]=nums2[j];
                 j--;
             }
             empty--;
+
         }
-        while (j >= 0) {
-            nums1[empty] = nums2[j];
+        while(j>=0){
+            nums1[empty]=nums2[j];
             j--;
             empty--;
         }
